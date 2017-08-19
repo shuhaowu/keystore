@@ -87,11 +87,7 @@ class KeystoreFS(object):
 
     output = subprocess.check_output(["zpool", "status", "-x", self.name]).decode("utf-8")
     print(output.strip())
-    if "healthy" not in output:
-      self.set_readonly(True)
-      return False
-
-    return True
+    return "healthy" in output
 
   def set_readonly(self, readonly):
     if readonly:
